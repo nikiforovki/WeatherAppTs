@@ -1,13 +1,16 @@
-import styles from './index.module.css'
-import Today from "../../toDay";
-import WeatherWidget from "../../WeatherWidget";
+import styles from './index.module.css';
+import Today from '../../toDay';
+import WeatherWidget from '../../WeatherWidget';
 
-export default function Main() {
+type MainProps = {
+    city: string;
+};
+
+export default function Main({ city }: MainProps) {
     return (
         <div className={styles.box}>
-        <Today />
-        <WeatherWidget />
+            <Today city={city} />
+            <WeatherWidget city={city} />
         </div>
     );
 }
-

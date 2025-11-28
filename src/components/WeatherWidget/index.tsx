@@ -1,40 +1,44 @@
 import styles from './index.module.css'
+import { useForecast } from '../../hooks/useForecast.ts';
 
+type ForecastProps = {
+    city: string;
+};
 
+export default function WeatherWidget({ city }: ForecastProps) {
+    const { data, isLoading, isError, error } = useForecast(city);
 
-export default function WeatherWidget() {
+    if (isLoading) {
+        return <div>Загрузка прогноза...</div>;
+    }
+
+    if (isError || !data) {
+        return <div>Ошибка при загрузке прогноза: {(error as Error)?.message}</div>;
+    }
+
     return (
         <div className={styles.container}>
-            <div className={styles.cart}>
-                <span className={styles.title}>Дата</span>
-                <div>Температура</div>
-            </div>
+            {data.map((day) => (
+                <div key={day.date} className={styles.cart}>
+                    <span className={styles.title}>
+                        {day.weekday}, {day.date}
+                    </span>
 
-            <div className={styles.cart}>
-                <span className={styles.title}>Дата</span>
-                <div>Температура</div>
-            </div>
+                    <div className={styles.tempRow}>
+                        <span className={styles.tempCard}>{day.temp}°</span>
 
-            <div className={styles.cart}>
-                <span className={styles.title}>Дата</span>
-                <div>Температура</div>
-            </div>
+                        <img
+                            className={styles.icon}
+                            src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`}
+                            alt={day.description}
+                        />
+                    </div>
 
-            <div className={styles.cart}>
-                <span className={styles.title}>Дата</span>
-                <div>Температура</div>
-            </div>
-
-            <div className={styles.cart}>
-                <span className={styles.title}>Дата</span>
-                <div>Температура</div>
-            </div>
-
-            <div className={styles.cart}>
-                <span className={styles.title}>Дата</span>
-                <div>Температура</div>
-            </div>
+                    <div className={styles.descriptionCard}>
+                        {day.description}
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }
-

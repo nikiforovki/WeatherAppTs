@@ -3,7 +3,6 @@
     width: 250px;
     height: 400px;
     flex-direction: column;
-    border: 1px solid red;
 }
 
 .title {
@@ -11,19 +10,40 @@
     justify-content: center;
     font-size: 25px;
     text-align: center;
-    color: #0e0d0d;
+    color: #fdfdfd;
 }
 
 .title2 {
     display: flex;
     justify-content: center;
-    font-size: 15px;
+    font-size: 24px;
     text-align: center;
-    color: #0e0d0d;
+    color: #fdfdfd;
+}
+
+.country {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
 }
 
 .gradus {
     display: flex;
     justify-content: center;
-    font-size: 40px;
+    font-size: 100px;
+}
+
+.boxLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    color: black;
 }

@@ -1,13 +1,16 @@
-import styles from './index.module.css'
-import Input from "../../input";
-import Btn from "../../btn";
+import styles from './index.module.css';
+import Input from '../../input';
+import Btn from '../../btn';
 
-export default function Header() {
+type HeaderProps = {
+    onSearch: (city: string) => void;
+};
+
+export default function Header({ onSearch }: HeaderProps) {
     return (
         <div className={styles.box}>
-         <Input />
-         <Btn />
+            <Input onSearch={onSearch} />
+            <Btn />
         </div>
     );
 }
-
