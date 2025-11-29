@@ -8,7 +8,7 @@
 .title {
     display: flex;
     justify-content: center;
-    font-size: 25px;
+    font-size: 42px;
     text-align: center;
     color: #fdfdfd;
 }
@@ -41,9 +41,20 @@
     margin-bottom: 20px;
 }
 
+
+.btnGeo {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    background: #fdfdfd;
+    color: #0e0d0d;
+    margin-bottom: 20px;
+}
+
 .btn {
     display: flex;
     justify-content: center;
+    font-size: 14px;
     background-color: white;
     color: black;
 }

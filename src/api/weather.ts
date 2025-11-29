@@ -10,7 +10,7 @@ export async function getWeather(city: string) {
     }
 
     const data = await res.json();
-    console.log('Weather data:', data); // здесь смотри, какие поля приходят
+    console.log('Weather data:', data);
     return data;
 }
 
@@ -25,5 +25,33 @@ export async function getForecast(city: string) {
 
     const data = await res.json();
     console.log('Forecast data:', data);
+    return data;
+}
+
+
+export async function getWeatherByCoords(lat: number, lon: number) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ru`;
+
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`Ошибка запроса по координатам: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    console.log('Данные о погоде по координатам:', data);
+    return data;
+}
+
+export async function getForecastByCoords(lat: number, lon: number) {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ru`;
+
+    const res = await fetch(url);
+
+    if (!res.ok) {
+        throw new Error(`Ошибка запроса прогноза по координатам: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    console.log('Forecast data by coords:', data);
     return data;
 }

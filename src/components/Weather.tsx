@@ -7,8 +7,8 @@ type WeatherProps = {
 
 export function Weather({ city }: WeatherProps) {
     const { data, isLoading, isError, error } = useQuery({
-        queryKey: ['weather', city],          // ключ кеша
-        queryFn: () => getWeather(city),      // функция из api/weather.ts
+        queryKey: ['weather', city],
+        queryFn: () => getWeather(city),
     });
 
     if (isLoading) return <div>Загрузка погоды...</div>;

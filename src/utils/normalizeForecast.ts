@@ -19,6 +19,7 @@ export function normalizeForecast(data: any): DailyForecast[] {
     });
 
     const days = Object.keys(byDate)
+        .sort()
         .slice(0, 6)
         .map((dateStr) => {
             const items = byDate[dateStr];
@@ -39,6 +40,8 @@ export function normalizeForecast(data: any): DailyForecast[] {
                 description: target.weather[0].description,
             };
         });
+
+    console.log('Сколько дней после нормализации:', days.length);
 
     return days;
 }

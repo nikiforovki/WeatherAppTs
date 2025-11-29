@@ -1,19 +1,33 @@
-import styles from './index.module.css'
+import styles from './index.module.css';
 import { useForecast } from '../../hooks/useForecast.ts';
+import { useForecastByCoords } from '../../hooks/useForecastByCoords.ts';
+
+type Coords = { lat: number; lon: number } | null;
 
 type ForecastProps = {
     city: string;
+    coords: Coords;
+    useGeo: boolean;
 };
 
-export default function WeatherWidget({ city }: ForecastProps) {
-    const { data, isLoading, isError, error } = useForecast(city);
+export default function WeatherWidget({ city, coords, useGeo }: ForecastProps) {
+    const cityQuery = useForecast(city);
+    const coordsQuery = useForecastByCoords(coords?.lat, coords?.lon);
+    const data = useGeo ? coordsQuery.data : cityQuery.data;
+    const isLoading = useGeo ? coordsQuery.isLoading : cityQuery.isLoading;
+    const isError = useGeo ? coordsQuery.isError : cityQuery.isError;
+    const error = useGeo ? coordsQuery.error : cityQuery.error;
 
     if (isLoading) {
         return <div>Загрузка прогноза...</div>;
     }
 
     if (isError || !data) {
-        return <div>Ошибка при загрузке прогноза: {(error as Error)?.message}</div>;
+        return (
+            <div>
+                Ошибка при загрузке прогноза: {(error as Error)?.message}
+            </div>
+        );
     }
 
     return (
