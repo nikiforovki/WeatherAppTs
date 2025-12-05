@@ -13,3 +13,5 @@ export function useForecast(city: string) {
         enabled: !!city,
     });
 }
+
+

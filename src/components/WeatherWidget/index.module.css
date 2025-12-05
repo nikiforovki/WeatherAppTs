@@ -19,7 +19,7 @@
 .cart {
     border: 1px solid #00000029;
     color: #0e0d0d;
-    background-color: #FFFFFF;
+    background-color: var(--primary-cart-bg);
     display: flex;
     flex-direction: column;
     justify-content: center;

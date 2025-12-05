@@ -1,68 +1,206 @@
+/* БАЗА (общие настройки) */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* по умолчанию пусть будет светлая тема (белый фон) */
+    color-scheme: light;
 }
+
+/* ---------- ПАЛИТРА ДЛЯ ТЕМ ---------- */
+
+/* СВЕТЛАЯ ТЕМА (белый фон) */
+html[data-theme='light'],
+:root:not([data-theme]) {
+    /* фон и текст */
+    --bg-color: #ffffff;
+    --text-color: #f9fafb;
+
+    /* ссылки */
+    --link-color: #646cff;
+    --link-hover-color: #747bff;
+
+    /* кнопки */
+    --button-bg: #f9f9f9;
+    --button-text-color: #213547;
+    --button-border-color: transparent;
+
+    /* Today‑карточка */
+    --today-title-color: #f9fafb;
+    --today-subtitle-color: #f9fafb;
+    --country-color: #f9fafb;
+    --gradus-color: #f9fafb;
+
+    --primary-btn-bg: #ffffff;
+    --primary-btn-text: #111827;
+
+
+    /* Name контейнера */
+    --primary-color-txt: #FFFFFF;
+
+    /* Карточки */
+    --primary-cart-bg: #FFFFFF;
+
+
+}
+
+/* ТЁМНАЯ ТЕМА (тёмный фон, для твоего синего оформления) */
+html[data-theme='dark'] {
+    color-scheme: dark;
+
+    --bg-color: #242424;
+    --text-color: #111827;
+
+    --link-color: #646cff;
+    --link-hover-color: #535bf2;
+
+    --button-bg: #1a1a1a;
+    --button-text-color: rgba(255, 255, 255, 0.87);
+    --button-border-color: transparent;
+
+    --today-title-color: #111827;
+    --today-subtitle-color: #111827;
+    --country-color: #374151;
+    --gradus-color: #111827;
+
+    --primary-btn-bg: #1f2937;
+    --primary-btn-text: #f9fafb;
+
+
+    /* Name контейнера */
+    --primary-color-txt: #111827;
+
+    /* Карточки по дням */
+    --primary-cart-bg: #ffffff4f;
+}
+
+/* ---------- ГЛОБАЛЬНЫЕ СТИЛИ ---------- */
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: var(--link-color);
+    text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+    color: var(--link-hover-color);
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid var(--button-border-color);
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+
+    cursor: pointer;
+    transition: border-color 0.25s, background-color 0.25s, color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+    border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+
+
+
+
+
+
+
+/*:root {*/
+/*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;*/
+/*  line-height: 1.5;*/
+/*  font-weight: 400;*/
+
+/*  color-scheme: light dark;*/
+/*  color: rgba(255, 255, 255, 0.87);*/
+/*  background-color: #242424;*/
+
+/*  font-synthesis: none;*/
+/*  text-rendering: optimizeLegibility;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+/*}*/
+
+/*a {*/
+/*  font-weight: 500;*/
+/*  color: #646cff;*/
+/*  text-decoration: inherit;*/
+/*}*/
+/*a:hover {*/
+/*  color: #535bf2;*/
+/*}*/
+
+/*body {*/
+/*  margin: 0;*/
+/*  display: flex;*/
+/*  place-items: center;*/
+/*  min-width: 320px;*/
+/*  min-height: 100vh;*/
+/*}*/
+
+/*h1 {*/
+/*  font-size: 3.2em;*/
+/*  line-height: 1.1;*/
+/*}*/
+
+/*button {*/
+/*  border-radius: 8px;*/
+/*  border: 1px solid transparent;*/
+/*  padding: 0.6em 1.2em;*/
+/*  font-size: 1em;*/
+/*  font-weight: 500;*/
+/*  font-family: inherit;*/
+/*  background-color: #1a1a1a;*/
+/*  cursor: pointer;*/
+/*  transition: border-color 0.25s;*/
+/*}*/
+/*button:hover {*/
+/*  border-color: #646cff;*/
+/*}*/
+/*button:focus,*/
+/*button:focus-visible {*/
+/*  outline: 4px auto -webkit-focus-ring-color;*/
+/*}*/
+
+/*@media (prefers-color-scheme: light) {*/
+/*  :root {*/
+/*    color: #213547;*/
+/*    background-color: #ffffff;*/
+/*  }*/
+/*  a:hover {*/
+/*    color: #747bff;*/
+/*  }*/
+/*  button {*/
+/*    background-color: #f9f9f9;*/
+/*  }*/
+/*}*/
