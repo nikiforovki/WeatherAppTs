@@ -39,6 +39,7 @@ h1 {
   color: rgba(7, 42, 65, 0.64);
 }
 
+/* Адаптив для планшетов */
 @media (max-width: 1199px) {
   .container {
     grid-template-columns: repeat(3, 1fr);
@@ -56,6 +57,7 @@ h1 {
   }
 }
 
+/* Адаптив для малых планшетов и больших телефонов */
 @media (max-width: 767px) {
   .container {
     grid-template-columns: repeat(2, 1fr);
@@ -77,6 +79,7 @@ h1 {
   }
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 479px) {
   .container {
     grid-template-columns: 1fr;

@@ -21,6 +21,7 @@
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* светлая сторона */
 .switchLight {
   background-color: #f1f1f1;
   color: #111827;
@@ -30,6 +31,7 @@
   transform: translateX(30px);
 }
 
+/* тёмная сторона */
 .switchDark {
   background-color: #111827;
   color: #f9fafb;
@@ -76,6 +78,7 @@
   line-height: 1;
 }
 
+/* Адаптив для планшетов */
 @media (max-width: 1199px) {
   .switch {
     width: 150px;
@@ -103,6 +106,7 @@
   }
 }
 
+/* Адаптив для малых планшетов и больших телефонов */
 @media (max-width: 767px) {
   .switch {
     width: 130px;
@@ -130,6 +134,7 @@
   }
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 479px) {
   .switch {
     width: 120px;

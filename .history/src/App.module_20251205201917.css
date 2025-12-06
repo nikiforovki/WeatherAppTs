@@ -20,26 +20,23 @@ body {
   padding: 0 20px;
 }
 
+/* Адаптив для планшетов */
 @media (max-width: 1199px) {
   .container {
     padding: 0 15px;
   }
 }
 
+/* Адаптив для малых планшетов и больших телефонов */
 @media (max-width: 767px) {
   .container {
     padding: 0 10px;
   }
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 479px) {
   .container {
     padding: 0 5px;
-  }
-}
-
-@media (max-width: 359px) {
-  .container {
-    padding: 0 2px;
   }
 }

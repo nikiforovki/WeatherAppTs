@@ -66,18 +66,21 @@
   color: #d00;
 }
 
+/* Адаптив для планшетов */
 @media (max-width: 1199px) {
   .input {
     width: 500px;
   }
 }
 
+/* Адаптив для малых планшетов и больших телефонов */
 @media (max-width: 767px) {
   .input {
     width: 300px;
   }
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 479px) {
   .wrapper {
     flex-direction: column;
@@ -98,27 +101,5 @@
     min-width: 250px;
     padding: 12px;
     font-size: 16px;
-  }
-}
-
-@media (max-width: 479px) {
-  .dropdown {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    right: 0;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-
-  .dropdownItem {
-    font-size: 16px;
-    padding: 8px;
-    flex-wrap: wrap;
-  }
-
-  .removeBtn {
-    font-size: 20px;
-    padding: 0 8px;
   }
 }

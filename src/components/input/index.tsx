@@ -102,12 +102,10 @@ export default function Input({ onSearch }: InputProps) {
                                 >
                 {city.country}, {city.name}
               </span>
-
-                                {/* кнопка удаления */}
                                 <button
                                     className={styles.removeBtn}
                                     onMouseDown={(e) => {
-                                        e.preventDefault(); // чтобы не срабатывал blur/выбор
+                                        e.preventDefault();
                                         handleRemoveFavorite(city.id);
                                     }}
                                 >

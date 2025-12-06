@@ -1,0 +1,7 @@
+.box {
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    margin-bottom: 100px;
+}
+

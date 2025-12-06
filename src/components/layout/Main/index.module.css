@@ -1,7 +1,27 @@
 .box {
-    display: flex;
-    flex-direction: row;
-    width: 1200px;
-    margin-bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  width: 1200px;
+  margin-bottom: 100px;
 }
 
+@media (max-width: 1199px) {
+  .box {
+    width: 90%;
+  }
+}
+
+@media (max-width: 767px) {
+  .box {
+    width: 95%;
+  }
+}
+
+@media (max-width: 479px) {
+  .box {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+}

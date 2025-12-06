@@ -66,18 +66,21 @@
   color: #d00;
 }
 
+/* Адаптив для планшетов */
 @media (max-width: 1199px) {
   .input {
     width: 500px;
   }
 }
 
+/* Адаптив для малых планшетов и больших телефонов */
 @media (max-width: 767px) {
   .input {
     width: 300px;
   }
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 479px) {
   .wrapper {
     flex-direction: column;
@@ -101,6 +104,7 @@
   }
 }
 
+/* Адаптив для мобильных устройств - дополнение для выпадающего списка */
 @media (max-width: 479px) {
   .dropdown {
     position: absolute;
