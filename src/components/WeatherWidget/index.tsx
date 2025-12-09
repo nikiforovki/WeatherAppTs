@@ -1,14 +1,8 @@
 import styles from './index.module.css';
 import { useForecast } from '../../hooks/useForecast.ts';
 import { useForecastByCoords } from '../../hooks/useForecastByCoords.ts';
+import type { ForecastProps } from "./type"
 
-type Coords = { lat: number; lon: number } | null;
-
-type ForecastProps = {
-    city: string;
-    coords: Coords;
-    useGeo: boolean;
-};
 
 export default function WeatherWidget({ city, coords, useGeo }: ForecastProps) {
     const cityQuery = useForecast(city);

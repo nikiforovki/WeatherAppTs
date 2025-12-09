@@ -1,24 +1,27 @@
-import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { ThemeContext, type Theme } from './ThemeContext';
+import { ThemeContext } from './ThemeContext';
 import { getThemeByTime } from '../../utils/getThemeByTime';
+import {
+    THEME_TYPES,
+    THEME_STORAGE_KEY,
+    HTML_THEME_ATTRIBUTE,
+    THEME_UPDATE_INTERVAL_MS,
+} from '../../constants';
+import type { Theme, ThemeProviderProps } from "./type";
 
-type Props = {
-    children: ReactNode;
-    defaultTheme?: Theme;
-};
-
-const STORAGE_KEY = 'theme';
-
-export const ThemeProvider = ({ children, defaultTheme = 'system' }: Props) => {
+export const ThemeProvider = ({ children, defaultTheme = THEME_TYPES.SYSTEM }: ThemeProviderProps) => {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
-        const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
+        const stored = window.localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
 
-        if (stored === 'light' || stored === 'dark' || stored === 'system') {
+        if (
+            stored === THEME_TYPES.LIGHT ||
+            stored === THEME_TYPES.DARK ||
+            stored === THEME_TYPES.SYSTEM
+        ) {
             setTheme(stored);
         }
     }, []);
@@ -26,25 +29,25 @@ export const ThemeProvider = ({ children, defaultTheme = 'system' }: Props) => {
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
-        const resolved: Exclude<Theme, 'system'> =
-            theme === 'system' ? getThemeByTime() : theme;
+        const resolved: Theme =
+            theme === THEME_TYPES.SYSTEM ? getThemeByTime() : theme;
 
-        document.documentElement.setAttribute('data-theme', resolved);
-        window.localStorage.setItem(STORAGE_KEY, theme);
+        document.documentElement.setAttribute(HTML_THEME_ATTRIBUTE, resolved);
+        window.localStorage.setItem(THEME_STORAGE_KEY, theme);
     }, [theme]);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
-        if (theme !== 'system') return;
+        if (theme !== THEME_TYPES.SYSTEM) return;
 
         const applyCurrent = () => {
             const current = getThemeByTime();
-            document.documentElement.setAttribute('data-theme', current);
+            document.documentElement.setAttribute(HTML_THEME_ATTRIBUTE, current);
         };
 
         applyCurrent();
 
-        const id = window.setInterval(applyCurrent, 2 * 60 * 1000);
+        const id = window.setInterval(applyCurrent, THEME_UPDATE_INTERVAL_MS);
 
         return () => window.clearInterval(id);
     }, [theme]);

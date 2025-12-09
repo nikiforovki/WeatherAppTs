@@ -1,17 +1,8 @@
 import { useEffect, useState } from 'react';
 import styles from './index.module.css';
+import { LS_KEYS, INPUT_DROPDOWN_CLOSE_DELAY_MS } from '../../constants';
+import type {InputProps, FavoriteCity } from "./type"
 
-type InputProps = {
-    onSearch: (city: string) => void;
-};
-
-type FavoriteCity = {
-    id: string;
-    name: string;
-    country: string;
-};
-
-const LS_KEY = 'favoriteCities';
 
 export default function Input({ onSearch }: InputProps) {
     const [value, setValue] = useState('');
@@ -20,16 +11,28 @@ export default function Input({ onSearch }: InputProps) {
 
 
     useEffect(() => {
-        try {
-            const stored = localStorage.getItem(LS_KEY);
-            if (!stored) return;
-            const parsed = JSON.parse(stored);
-            if (Array.isArray(parsed)) {
-                setFavorites(parsed);
+        let isMounted = true;
+
+        const id = window.setTimeout(() => {
+            if (!isMounted) return;
+
+            try {
+                const stored = localStorage.getItem(LS_KEYS.FAVORITE_CITIES);
+                if (!stored) return;
+
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed)) {
+                    setFavorites(parsed);
+                }
+            } catch (e) {
+                console.error('Ошибка чтения избранных городов', e);
             }
-        } catch (e) {
-            console.error('Ошибка чтения избранных городов', e);
-        }
+        }, 0);
+
+        return () => {
+            isMounted = false;
+            window.clearTimeout(id);
+        };
     }, []);
 
 
@@ -55,7 +58,7 @@ export default function Input({ onSearch }: InputProps) {
 
     const handleRemoveFavorite = (id: string) => {
         try {
-            const stored = localStorage.getItem(LS_KEY);
+            const stored = localStorage.getItem(LS_KEYS.FAVORITE_CITIES);
             if (!stored) return;
 
             const parsed = JSON.parse(stored) as FavoriteCity[];
@@ -63,7 +66,7 @@ export default function Input({ onSearch }: InputProps) {
 
             const updated = parsed.filter((c) => c.id !== id);
 
-            localStorage.setItem(LS_KEY, JSON.stringify(updated));
+            localStorage.setItem(LS_KEYS.FAVORITE_CITIES, JSON.stringify(updated));
             setFavorites(updated);
         } catch (e) {
             console.error('Ошибка удаления избранного города', e);
@@ -83,7 +86,10 @@ export default function Input({ onSearch }: InputProps) {
                     }}
                     onFocus={() => setIsOpen(true)}
                     onBlur={() => {
-                        setTimeout(() => setIsOpen(false), 150);
+                        setTimeout(
+                            () => setIsOpen(false),
+                            INPUT_DROPDOWN_CLOSE_DELAY_MS,
+                        );
                     }}
                     onKeyDown={handleKeyDown}
                 />
@@ -92,16 +98,15 @@ export default function Input({ onSearch }: InputProps) {
                     <div className={styles.dropdown}>
                         {favorites.map((city) => (
                             <div key={city.id} className={styles.dropdownItem}>
-                                {/* выбор города */}
-                                <span
-                                    className={styles.cityName}
-                                    onMouseDown={(e) => {
-                                        e.preventDefault();
-                                        handleSelectFavorite(city);
-                                    }}
-                                >
-                {city.country}, {city.name}
-              </span>
+                <span
+                    className={styles.cityName}
+                    onMouseDown={(e) => {
+                        e.preventDefault();
+                        handleSelectFavorite(city);
+                    }}
+                >
+                  {city.country}, {city.name}
+                </span>
                                 <button
                                     className={styles.removeBtn}
                                     onMouseDown={(e) => {

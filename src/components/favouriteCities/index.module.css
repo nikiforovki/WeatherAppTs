@@ -1,16 +1,15 @@
 .container {
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    width: 700px;
-    margin-top: 80px;f
-    border: 1px solid black;
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  width: 700px;
+  margin-top: 80px;
+  border: 1px solid black;
 }
 
 .items {
-    font-size: 24px;
-    display: flex;
-    flex-direction: row;
-    color: #0e0d0d;
-
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+  color: #0e0d0d;
 }

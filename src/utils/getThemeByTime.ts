@@ -1,9 +1,11 @@
-export function getThemeByTime(): "light" | "dark" {
+import { DAY_START_HOUR, NIGHT_START_HOUR } from '../constants';
+
+export function getThemeByTime(): 'light' | 'dark' {
     const now = new Date();
     const hour = now.getHours();
-    const dayStart = 7;
-    const nightStart = 19;
 
-    if (hour >= dayStart && hour < nightStart) return "light";
-    return "dark";
+    if (hour >= DAY_START_HOUR && hour < NIGHT_START_HOUR) {
+        return 'light';
+    }
+    return 'dark';
 }

@@ -4,23 +4,10 @@ import { useWeather } from '../../hooks/useWeather.ts';
 import { useWeatherByCoords } from '../../hooks/useWeatherByCoords.ts';
 import { format } from 'date-fns';
 import { ru } from "date-fns/locale";
+import type { FavoriteCity, TodayProps } from "./type"
 
 const LS_KEY = 'favoriteCities';
 
-type FavoriteCity = {
-    id: string;
-    name: string;
-    country: string;
-};
-
-type Coords = { lat: number; lon: number } | null;
-
-type TodayProps = {
-    city: string;
-    coords: Coords;
-    useGeo: boolean;
-    onGeoSelect: (lat: number, lon: number) => void;
-};
 
 export default function Today({ city, coords, useGeo, onGeoSelect }: TodayProps) {
     const [geoError, setGeoError] = useState<string | null>(null);

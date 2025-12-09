@@ -1,14 +1,8 @@
 import styles from "./index.module.css";
 import { useWeather } from "../../../hooks/useWeather.ts";
 import { useWeatherByCoords } from "../../../hooks/useWeatherByCoords.ts";
+import type { FooterProps } from "./type"
 
-type Coords = { lat: number; lon: number } | null;
-
-type FooterProps = {
-    city: string;
-    coords: Coords;
-    useGeo: boolean;
-};
 
 function formatTime(unix?: number) {
     if (!unix) return "-";
