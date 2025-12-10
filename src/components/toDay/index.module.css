@@ -159,3 +159,61 @@
     margin-bottom: 10px;
   }
 }
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+html[data-theme="dark"] .skeleton {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeletonTitle {
+  width: 120px;
+  height: 42px;
+  margin: 0 auto;
+}
+
+.skeletonSubTitle {
+  width: 100px;
+  height: 24px;
+  margin: 0 auto;
+}
+
+.skeletonTemp {
+  width: 200px;
+  height: 10px;
+  margin: 0 auto;
+}
+
+.skeletonIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.skeletonText {
+  width: 80px;
+  height: 24px;
+}
+
+.skeletonButton {
+  width: 150px;
+  height: 30px;
+}

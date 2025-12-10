@@ -1,60 +1,66 @@
-import { useEffect, useState } from 'react';
-import { ThemeContext } from './ThemeContext';
-import { getThemeByTime } from '../../utils/getThemeByTime';
+import { useEffect, useState } from "react";
+import { ThemeContext } from "./ThemeContext";
+import { getThemeByTime } from "../../utils/getThemeByTime";
 import {
-    THEME_TYPES,
-    THEME_STORAGE_KEY,
-    HTML_THEME_ATTRIBUTE,
-    THEME_UPDATE_INTERVAL_MS,
-} from '../../constants';
-import type { Theme, ThemeProviderProps } from "./type";
+  THEME_TYPES,
+  STORAGE_KEY as THEME_STORAGE_KEY,
+  HTML_THEME_ATTRIBUTE,
+  THEME_UPDATE_INTERVAL_MS,
+} from "../../constants";
+import type { Theme } from "../../types";
+import type { ThemeProviderProps } from "./type";
 
-export const ThemeProvider = ({ children, defaultTheme = THEME_TYPES.SYSTEM }: ThemeProviderProps) => {
-    const [theme, setTheme] = useState<Theme>(defaultTheme);
+export const ThemeProvider = ({
+  children,
+  defaultTheme = THEME_TYPES.SYSTEM,
+}: ThemeProviderProps) => {
+  const [theme, setTheme] = useState<Theme>(defaultTheme);
 
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-        const stored = window.localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    const stored = window.localStorage.getItem(
+      THEME_STORAGE_KEY
+    ) as Theme | null;
 
-        if (
-            stored === THEME_TYPES.LIGHT ||
-            stored === THEME_TYPES.DARK ||
-            stored === THEME_TYPES.SYSTEM
-        ) {
-            setTheme(stored);
-        }
-    }, []);
+    if (
+      stored === THEME_TYPES.LIGHT ||
+      stored === THEME_TYPES.DARK ||
+      stored === THEME_TYPES.SYSTEM
+    ) {
+      setTheme(stored);
+    }
+  }, []);
 
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-        const resolved: Theme =
-            theme === THEME_TYPES.SYSTEM ? getThemeByTime() : theme;
+    const resolved: Theme =
+      theme === THEME_TYPES.SYSTEM ? getThemeByTime() : theme;
 
-        document.documentElement.setAttribute(HTML_THEME_ATTRIBUTE, resolved);
-        window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    }, [theme]);
+    document.documentElement.setAttribute(HTML_THEME_ATTRIBUTE, resolved);
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
 
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        if (theme !== THEME_TYPES.SYSTEM) return;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (theme !== THEME_TYPES.SYSTEM) return;
 
-        const applyCurrent = () => {
-            const current = getThemeByTime();
-            document.documentElement.setAttribute(HTML_THEME_ATTRIBUTE, current);
-        };
+    const applyCurrent = () => {
+      const current = getThemeByTime();
+      document.documentElement.setAttribute(HTML_THEME_ATTRIBUTE, current);
+    };
 
-        applyCurrent();
+    applyCurrent();
 
-        const id = window.setInterval(applyCurrent, THEME_UPDATE_INTERVAL_MS);
+    const id = window.setInterval(applyCurrent, THEME_UPDATE_INTERVAL_MS);
 
-        return () => window.clearInterval(id);
-    }, [theme]);
+    return () => window.clearInterval(id);
+  }, [theme]);
 
-    return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };

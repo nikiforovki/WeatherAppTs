@@ -1,12 +1,22 @@
 import {
-  WEATHER_API_BASE_URL,
   WEATHER_API_ENDPOINT_CURRENT,
   WEATHER_API_ENDPOINT_FORECAST,
   WEATHER_API_UNITS,
   WEATHER_API_LANGUAGE,
 } from "../constants/weather";
+import axios from "axios";
 
 const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+
+const weatherApiClient = axios.create({
+  baseURL: "https://api.openweathermap.org/data/2.5",
+  params: {
+    appid: apiKey,
+    units: WEATHER_API_UNITS,
+    lang: WEATHER_API_LANGUAGE,
+  },
+  timeout: 10000,
+});
 
 // Типы для данных API
 export type WeatherData = {
@@ -92,66 +102,69 @@ export type ForecastData = {
 };
 
 export async function getWeather(city: string): Promise<WeatherData> {
-  const url = `${WEATHER_API_BASE_URL}${WEATHER_API_ENDPOINT_CURRENT}?q=${city}&appid=${apiKey}&units=${WEATHER_API_UNITS}&lang=${WEATHER_API_LANGUAGE}`;
+  const response = await weatherApiClient.get<WeatherData>(
+    WEATHER_API_ENDPOINT_CURRENT,
+    {
+      params: {
+        q: city,
+        units: WEATHER_API_UNITS,
+        lang: WEATHER_API_LANGUAGE,
+      },
+    }
+  );
 
-  const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(`Ошибка запроса: ${res.status} ${res.statusText}`);
-  }
-
-  const data: WeatherData = await res.json();
-  console.log("Weather data:", data);
-  return data;
+  return response.data;
 }
 
 export async function getForecast(city: string): Promise<ForecastData> {
-  const url = `${WEATHER_API_BASE_URL}${WEATHER_API_ENDPOINT_FORECAST}?q=${city}&appid=${apiKey}&units=${WEATHER_API_UNITS}&lang=${WEATHER_API_LANGUAGE}`;
+  const response = await weatherApiClient.get<ForecastData>(
+    WEATHER_API_ENDPOINT_FORECAST,
+    {
+      params: {
+        q: city,
+        units: WEATHER_API_UNITS,
+        lang: WEATHER_API_LANGUAGE,
+      },
+    }
+  );
 
-  const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(`Ошибка запроса прогноза: ${res.status} ${res.statusText}`);
-  }
-
-  const data: ForecastData = await res.json();
-  console.log("Forecast data:", data);
-  return data;
+  return response.data;
 }
 
 export async function getWeatherByCoords(
   lat: number,
   lon: number
 ): Promise<WeatherData> {
-  const url = `${WEATHER_API_BASE_URL}${WEATHER_API_ENDPOINT_CURRENT}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${WEATHER_API_UNITS}&lang=${WEATHER_API_LANGUAGE}`;
+  const response = await weatherApiClient.get<WeatherData>(
+    WEATHER_API_ENDPOINT_CURRENT,
+    {
+      params: {
+        lat,
+        lon,
+        units: WEATHER_API_UNITS,
+        lang: WEATHER_API_LANGUAGE,
+      },
+    }
+  );
 
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(
-      `Ошибка запроса по координатам: ${res.status} ${res.statusText}`
-    );
-  }
-
-  const data: WeatherData = await res.json();
-  console.log("Данные о погоде по координатам:", data);
-  return data;
+  return response.data;
 }
 
 export async function getForecastByCoords(
   lat: number,
   lon: number
 ): Promise<ForecastData> {
-  const url = `${WEATHER_API_BASE_URL}${WEATHER_API_ENDPOINT_FORECAST}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${WEATHER_API_UNITS}&lang=${WEATHER_API_LANGUAGE}`;
+  const response = await weatherApiClient.get<ForecastData>(
+    WEATHER_API_ENDPOINT_FORECAST,
+    {
+      params: {
+        lat,
+        lon,
+        units: WEATHER_API_UNITS,
+        lang: WEATHER_API_LANGUAGE,
+      },
+    }
+  );
 
-  const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(
-      `Ошибка запроса прогноза по координатам: ${res.status} ${res.statusText}`
-    );
-  }
-
-  const data: ForecastData = await res.json();
-  console.log("Forecast data by coords:", data);
-  return data;
+  return response.data;
 }

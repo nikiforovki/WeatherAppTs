@@ -1,9 +1,7 @@
-declare namespace NodeJS {
-    interface ProcessEnv {
-        readonly REACT_APP_WEATHER_API_KEY?: string;
-    }
+interface ImportMetaEnv {
+  readonly VITE_WEATHER_API_KEY: string;
 }
 
-declare const process: {
-    env: NodeJS.ProcessEnv;
-};
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}

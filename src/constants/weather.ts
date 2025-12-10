@@ -10,6 +10,5 @@ export const WEATHER_API_ENDPOINT_FORECAST = "/forecast";
 export const WEATHER_API_UNITS = "metric";
 export const WEATHER_API_LANGUAGE = "ru";
 
-// Константы для времени
 export const DAY_START = 7;
 export const NIGHT_START = 19;
